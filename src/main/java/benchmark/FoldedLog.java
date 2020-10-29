@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Fork(value = 2)
+@Warmup(iterations = 5)
 public class FoldedLog {
 
     @Benchmark

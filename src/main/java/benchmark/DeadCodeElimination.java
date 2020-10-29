@@ -16,20 +16,19 @@ public class DeadCodeElimination {
     }
 
     @Benchmark
-    @Warmup(iterations = 5)
+    @Warmup(iterations = 10)
     public void objectCreation() {
         new Object(); // dead code
     }
 
     @Benchmark
-    @Warmup(iterations = 5)
+    @Warmup(iterations = 10)
     public Object pillarsOfCreation() {
         return new Object();
     }
 
     @Benchmark
-    @OutputTimeUnit(TimeUnit.NANOSECONDS)
-    @BenchmarkMode(Mode.AverageTime)
+    @Warmup(iterations = 5)
     public void blackHole(Blackhole blackhole) {
         blackhole.consume(new Object());
     }
