@@ -22,6 +22,7 @@ public class Test {
         );
 
         /* Solve the following tasks in separate methods and test them in the main method.
+        0 Print all transactions, each one on a new row
         1 Find all transactions in the year 2011 and sort them by value (small to high).
         2 What are all the unique cities where the traders work?
         3 Find all traders from Cambridge and sort them by name.
