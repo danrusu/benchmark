@@ -1,12 +1,16 @@
 package benchmark;
 
 import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
+import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
-
-@BenchmarkMode(Mode.AverageTime)
+@BenchmarkMode(Mode.SampleTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx4G"})
 @State(Scope.Benchmark)
@@ -28,5 +32,16 @@ public class ParallelStreamBenchmark {
     @TearDown(Level.Invocation)
     public void tearDown() {
         System.gc();
+    }
+
+
+    // Programmatic JMH run
+    @Test
+    public void runBenchmarks() throws RunnerException{
+        Options options = new OptionsBuilder()
+                .jvmArgs("-Xms4G", "-Xmx4G")
+                .build();
+
+        new Runner(options).run();
     }
 }
