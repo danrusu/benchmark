@@ -7,12 +7,13 @@ import java.util.Objects;
 
 public class PhoneNumber implements Formattable, Comparable<PhoneNumber> {
 
-    public static final Comparator<PhoneNumber> PHONE_NUMBER_COMPARATOR = Comparator
-            .comparingInt(PhoneNumber::getAreaCode)
-            .thenComparing(PhoneNumber::getNumber);
     private final int areaCode;
     private final int number;
     private int hashCode;
+
+    public static final Comparator<PhoneNumber> PHONE_NUMBER_COMPARATOR = Comparator
+            .comparingInt(PhoneNumber::getAreaCode)
+            .thenComparing(PhoneNumber::getNumber);
 
     // com.google.common.base.Preconditions.checkArgument
     public static void checkArgument(boolean expression) {
