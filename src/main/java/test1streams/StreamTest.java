@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import static java.util.Collections.reverseOrder;
 import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 // from Modern Java in Action - 2018 - Raoul-Gabriel Urma, pag 117
@@ -93,14 +94,14 @@ public class StreamTest {
     @Test
     public void test4() {
         System.out.println("4. Return a string of all traders’ names sorted alphabetically.");
-        List<String> tradersNames = transactions.stream()
+        String tradersNames = transactions.stream()
                 .map(Transaction::getTrader)
                 .map(Trader::getName)
                 .distinct()
                 .sorted()
-                .collect(toList());
+                .collect(joining(", "));
 
-        tradersNames.forEach(System.out::println);
+        System.out.println(tradersNames);
     }
 
     @Test
@@ -129,6 +130,8 @@ public class StreamTest {
     public void test7() {
         System.out.println("7. What’s the highest value of all the transactions?");
         OptionalInt highestTransactionValue = transactions.stream()
+                //.map(Transaction::getValue)
+                //.reduce(Integer::max)
                 .mapToInt(Transaction::getValue)
                 .max();
 
@@ -139,9 +142,7 @@ public class StreamTest {
     public void test8() {
         System.out.println("8. Find the transaction with the smallest value.");
         Optional<Transaction> transactionWithTheSmallestValue = transactions.stream()
-                .sorted(comparing(Transaction::getValue))
-                .limit(1)
-                .findFirst();
+                .min(comparing(Transaction::getValue));
 
         transactionWithTheSmallestValue.ifPresent(System.out::println);
     }
